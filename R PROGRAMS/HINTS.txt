@@ -1,0 +1,91 @@
+#bar chart
+ 
+H <- c(12,35,54,3,41)  
+M<- c("Feb","Mar","Apr","May","Jun")  
+ 
+barplot(H,names.arg=M,xlab="Month",ylab="Revenue",col="Green",  
+        main="Revenue Bar chart",border="red")  
+
+#group bar
+categories <- c("cust1", "cust2", "cust3","cust4")
+values1 <- c(4,3,5,2)
+values2 <- c(2,5,3,4)
+data <- rbind(values1, values2)
+barplot(data, beside = TRUE, col = c("skyblue", "orange"), names.arg = categories, legend.text = c("Group 1", "Group 2"), main = "Grouped Bar Chart Example", xlab = "Categories", ylab = "Values")
+
+#stacked bar
+library(ggplot2)
+data=data.frame(
+  cust=c("cust1","cust2","cust3","cust1"),
+  rating=c(4,3,5,2)
+)
+
+ggplot(data, aes(x = data$cust, y = data$rating, fill = factor(data$rating))) + 
+  geom_bar(stat = "identity") +
+  labs(title = "data", x = "cust", y = "rating")
+
+#line chart
+# Sample data
+x <- c(1, 2, 3, 4, 5)
+y <- c(10, 15, 7, 20, 12)
+
+# Create a line chart
+plot(x, y, type = "l", col = "blue", lwd = 2, xlab = "X-axis", ylab = "Y-axis", main = "Line Chart")
+
+
+#scatter
+# plot(x,y,main,xlab,ylab,xlim,ylim,axes)
+
+data <- data.frame(wt=c(1,4,2,5,7,3,5,8,2,3),mpg=c(23,34,12,67,23,78,23,12,67,89))
+
+plot(x=data$wt,
+     y=data$mpg,
+     xlab="Weight",
+     ylab="Milage per Gallon",
+     main="Weight vs Milage")
+
+#pie
+geeks<- c(20,65,15,50)
+labels <- c("India","America","Sri Lanka","Nepal")
+pie(geeks, labels)
+
+#3d pie
+# Getting the library.  
+library(plotrix)  
+# Creating data for the graph.  
+x <- c(20, 65, 15, 50,45)  
+labels <- c("India", "America", "Shri Lanka", "Nepal","Bhutan")  
+
+pie3D(x,labels = labels,explode = 0.1, main = "Country Pie Chart")  
+
+#histogram
+#hist(v,main,xlab,ylab,xlim,ylim,breaks,col,border)  
+
+v <-  c(12,24,16,38,21,13,55,17,46,45,48,39,10,60)  
+hist(v,xlab = "Weight",ylab="Frequency",col = "green")  
+
+#worldcloud
+library(tm)
+library(wordcloud)
+text_data <- "R is a programming language and free software environment for statistical computing and graphics. It is widely used among statisticians and data miners for developing statistical software and data analysis"
+
+# Create a word cloud
+wordcloud(words = strsplit(text_data, " ")[[1]],
+          min.freq = 1,
+          scale = c(3, 0.5),
+          colors = brewer.pal(8, "Dark2"))
+
+#sentiment analysis
+# Install and load required packages
+# install.packages(c("tidyverse", "syuzhet"))
+library(tidyverse)
+library(syuzhet)
+
+# Load the customer feedback data
+customer_feedback <- data.frame(Customer = c("Customer 1", "Customer 2", "Customer 3", "Customer 4"),
+                                Rating = c(4, 3, 5, 2),
+                                Feedback = c("Great service!", "Decent but could improve.", "Excellent experience!", "Not satisfied at all."))
+
+# Perform sentiment analysis
+senti <- get_sentiment(customer_feedback$Feedback, method = "syuzhet", language = "english")
+print(senti)
